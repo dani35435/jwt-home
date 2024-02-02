@@ -1,0 +1,21 @@
+name: laravel-db
+services:
+  database:
+    environment:
+      POSTGRES_DB: app
+      POSTGRES_PASSWORD: dbPassword
+      POSTGRES_USER: app
+    image: postgres:16-alpine
+    ports:
+      - mode: ingress
+        target: 5432
+        published: "32770"
+        protocol: tcp
+    restart: always
+    volumes:
+      - type: volume
+        source: database_data
+        target: /var/lib/postgresql/data
+        volume: {}
+volumes:
+  database_data:
